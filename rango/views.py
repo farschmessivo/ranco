@@ -200,10 +200,10 @@ def user_login(request):
                 # An inactive account was used - no logging in!
                 return HttpResponse("Your Rango account is disabled.")
         else:
-            if user is None:
-                return HttpResponse("{0} doesn't exist".format(user.username))
-            else:
+            if not User.objects.filter(username=username).exists():
                 return HttpResponse("Your password is incorrect")
+            else:
+                return HttpResponse("{0} doesn't exist".format(user.username))
 
     #     # If we have a User object, the details are correct.
     #     # If None (Python's way of representing the absence of a value), no user
