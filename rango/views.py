@@ -6,6 +6,8 @@ from rango.forms import UserForm, UserProfileForm
 from django.core.urlresolvers import reverse
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
+
 
 
 def index(request):
@@ -200,10 +202,10 @@ def user_login(request):
                 # An inactive account was used - no logging in!
                 return HttpResponse("Your Rango account is disabled.")
         else:
-            if not User.objects.filter(username=username).exists():
+            if User.objects.filter(username=username).exists():
                 return HttpResponse("Your password is incorrect")
             else:
-                return HttpResponse("{0} doesn't exist".format(user.username))
+                return HttpResponse("{0} doesn't exist".format(username))
 
     #     # If we have a User object, the details are correct.
     #     # If None (Python's way of representing the absence of a value), no user
