@@ -202,30 +202,11 @@ def user_login(request):
                 # An inactive account was used - no logging in!
                 return HttpResponse("Your Rango account is disabled.")
         else:
+            # Does the username exist in DB?
             if User.objects.filter(username=username).exists():
                 return HttpResponse("Your password is incorrect")
             else:
                 return HttpResponse("{0} doesn't exist".format(username))
-
-    #     # If we have a User object, the details are correct.
-    #     # If None (Python's way of representing the absence of a value), no user
-    #     #  with matching credentials was found.
-    #     if user:
-    #         # Is the account active? It could have been disabled.
-    #         if user.is_active:
-    #             # If the account is valid and active, we can log the user in.
-    #             #  We'll send the user back to the homepage.
-    #             login(request, user)
-    #             return HttpResponseRedirect(reverse('index'))
-    #         else:
-    #             # An inactive account was used - no logging in!
-    #             return HttpResponse("Your Rango account is disabled.")
-    #     elif user is None:
-    #         # Bad login details were provided. So we can't log the user in.
-    #         print("Invalid login details: {0}, {1}".format(username, password))
-    #         return HttpResponse("Password is wrong")
-    #     else:
-    #         return HttpResponse("{0} doesn't exist".format(username))
     # The request is not a HTTP POST, so display the login form.
     # This scenario would most likely be a HTTP GET.
     else:
