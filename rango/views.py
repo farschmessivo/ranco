@@ -291,6 +291,8 @@ def search(request):
     if request.method == 'POST':
         query = request.POST['query'].strip()
         if query:
+            print(query)
+            print(type(query))
             # Run our Webhose search function to get the results list!
             result_list = run_query(query)
             context_dict = {'result_list': result_list, 'query': query}
