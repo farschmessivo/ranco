@@ -1,6 +1,7 @@
 import json
 import urllib.parse
 import urllib.request
+import sys
 
 
 def read_webhose_key():
@@ -14,6 +15,7 @@ def read_webhose_key():
     # http://docs.quantifiedcode.com/python-anti-patterns/maintainab
 
     webhose_api_key = None
+
     try:
         with open('search.key', 'r') as f:
             webhose_api_key = f.readline().strip()
@@ -68,3 +70,13 @@ def run_query(search_terms, size=10):
     # Return the list of results to the calling function.
     return results
 
+
+# def pretty_print_json(json_content):
+#     content = json.dumps(json_content, sort_keys=True, indent=4, ensure_ascii=False)
+#     print(content)
+#
+# if __name__ == '__main__':
+#     query = sys.argv[1]
+#     read_webhose_key()
+#     p = run_query(query, size=10)
+#     pretty_print_json(p)
