@@ -287,6 +287,7 @@ def visitor_cookie_handler(request):
 
 
 def search(request):
+    query = ''
     result_list = []
     if request.method == 'POST':
         query = request.POST['query'].strip()
@@ -295,8 +296,5 @@ def search(request):
             print(type(query))
             # Run our Webhose search function to get the results list!
             result_list = run_query(query)
-            context_dict = {'result_list': result_list, 'query': query}
-    context_dict = {'result_list': result_list}
+    context_dict = {'result_list': result_list, 'query': query}
     return render(request, 'rango/search.html', context_dict)
-
-
